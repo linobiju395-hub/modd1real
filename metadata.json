@@ -1,0 +1,8 @@
+{
+  "name": "CodeQuest: Junior Coding Academy",
+  "description": "An interactive coding learning platform for kids (Grades 1-5) featuring visual lessons, a coordinate playground, and logic puzzles.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
