@@ -44,7 +44,7 @@ const App: React.FC = () => {
           >
             {logoLoaded ? (
               <img 
-                src="public/Million-Coders-White-text.svg"
+                src="/Million-Coders-White-text.svg"
                 alt="Million Coders" 
                 className="h-12 md:h-20 w-auto block object-contain"
                 onError={() => setLogoLoaded(false)}
