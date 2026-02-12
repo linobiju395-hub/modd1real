@@ -98,10 +98,9 @@ const App: React.FC = () => {
                 <div className="relative mb-6">
                   {logoLoaded ? (
                     <img 
-                      src="public/Million-Coders-White-text.svg" 
+                      src="/Million-Coders-White-text.svg" 
                       className="w-40 h-40 md:w-72 md:h-72 drop-shadow-lg hover:scale-110 transition-transform duration-500 cursor-pointer animate-hero object-contain" 
                       alt="Million Coders" 
-                      onError={() => setLogoLoaded(false)}
                     />
                   ) : (
                     <LogoTextFallback className="md:scale-150 py-10" />
