@@ -99,7 +99,7 @@ const App: React.FC = () => {
                   {logoLoaded ? (
                     <img 
                       src="/Million-Coders-White-text.svg" 
-                      className="w-40 h-40 md:w-72 md:h-72 drop-shadow-lg hover:scale-110 transition-transform duration-500 cursor-pointer animate-hero object-contain" 
+                      className="w-28 h-28 md:w-56 md:h-56 drop-shadow-lg hover:scale-110 transition-transform duration-500 cursor-pointer animate-hero object-contain" 
                       alt="Million Coders" 
                     />
                   ) : (
