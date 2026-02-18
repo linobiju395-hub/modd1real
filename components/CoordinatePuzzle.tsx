@@ -28,7 +28,7 @@ const CoordinatePuzzle: React.FC = () => {
   const [isGameFinished, setIsGameFinished] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  const COORD_LIMIT = 50;
+  const COORD_LIMIT = 240;
   const WIN_TOLERANCE = 10; 
 
   useEffect(() => {
@@ -231,8 +231,8 @@ const CoordinatePuzzle: React.FC = () => {
                   <input 
                     type="number"
                     value={inputX}
-                    min="-50"
-                    max="50"
+                    min="-240"
+                    max="240"
                     onChange={(e) => handleCoordinateInput(e.target.value, setInputX)}
                     className="w-full bg-white text-blue-700 rounded-xl md:rounded-2xl px-2 py-1 md:py-3 focus:ring-4 ring-yellow-400 outline-none text-center font-black shadow-md border-b-4 border-gray-200 text-base md:text-2xl"
                   />
