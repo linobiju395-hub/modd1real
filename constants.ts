@@ -157,7 +157,7 @@ export const QUIZ_ONE = [
   {
     id: 4,
     question: "What is the biggest and smallest number we use for X and Y? 🔢",
-    options: ["-1 to 1", "-10 to 10", "-50 to 50", "0 to 100"],
+    options: ["-10 to 10", "-50 to 50", "-240 to 240", "0 to 100""],
     correctAnswer: 2
   },
   {
