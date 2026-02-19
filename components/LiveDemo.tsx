@@ -23,7 +23,8 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
   const [message, setMessage] = useState('');
   const [isLevelComplete, setIsLevelComplete] = useState(false);
 
-  const COORD_LIMIT = 240;
+  const X_LIMIT = 240;
+  const Y_LIMIT = 180;
 
   const getCorrectCostumeForBg = (background: string) => {
     const bgIndex = BACKGROUNDS.indexOf(background);
@@ -49,8 +50,8 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
   const handleStageClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (lessonId !== LessonId.STAGE_1_3 || isLevelComplete) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = Math.round(((e.clientX - rect.left) / rect.width) * (COORD_LIMIT * 2) - COORD_LIMIT);
-    const y = Math.round((1 - (e.clientY - rect.top) / rect.height) * (COORD_LIMIT * 2) - COORD_LIMIT);
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * (X_LIMIT * 2) - X_LIMIT);
+    const y = Math.round((1 - (e.clientY - rect.top) / rect.height) * (Y_LIMIT * 2) - Y_LIMIT);
     playSound('pop');
     setSprite(s => ({ ...s, x, y }));
     setMessage(`Teleported to X:${x} Y:${y}!`);
@@ -59,8 +60,8 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = Math.round(((e.clientX - rect.left) / rect.width) * (COORD_LIMIT * 2) - COORD_LIMIT);
-    const y = Math.round((1 - (e.clientY - rect.top) / rect.height) * (COORD_LIMIT * 2) - COORD_LIMIT);
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * (X_LIMIT * 2) - X_LIMIT);
+    const y = Math.round((1 - (e.clientY - rect.top) / rect.height) * (Y_LIMIT * 2) - Y_LIMIT);
     setMousePos({ x, y });
   };
 
@@ -70,7 +71,7 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
     switch (type) {
       case 'move':
         playSound('click');
-        setSprite(s => ({ ...s, x: Math.min(COORD_LIMIT, s.x + 10) }));
+        setSprite(s => ({ ...s, x: Math.min(X_LIMIT, s.x + 10) }));
         break;
       case 'turn':
         playSound('click');
@@ -83,7 +84,6 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
       case 'meow':
         if (sprite.meowing) return;
         playSound('pop');
-        // Removed text meow message
         setSprite(s => ({ ...s, meowing: true, flipped: false, rotation: 0 }));
         setTimeout(() => {
           setSprite(s => ({ ...s, meowing: false }));
@@ -112,8 +112,8 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
     }
   };
 
-  const getXPercent = (val: number) => `calc(50% + ${val / COORD_LIMIT * 50}%)`;
-  const getYPercent = (val: number) => `calc(50% - ${val / COORD_LIMIT * 50}%)`;
+  const getXPercent = (val: number) => `calc(50% + ${val / X_LIMIT * 50}%)`;
+  const getYPercent = (val: number) => `calc(50% - ${val / Y_LIMIT * 50}%)`;
 
   return (
     <div className="my-10 flex flex-col gap-4 animate-fadeIn">
@@ -123,7 +123,7 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
           {lessonId === LessonId.COSTUME_1_2 ? 'Mission: Match the Piece!' : 'Interactive Try-It!'}
         </h4>
         <div className="text-xs font-bold text-blue-500 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-          Range: -240 to 240
+          X: ±240, Y: ±180
         </div>
       </div>
 
@@ -180,7 +180,7 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
               <div className="flex items-center gap-2 mb-2 text-blue-500 not-italic font-bold uppercase text-[10px]">
                 <MousePointer2 size={14} /> Stage Explorer
               </div>
-              Move mouse to see X/Y (max 240). Click to teleport the sprite!
+              Move mouse to see X/Y (X max 240, Y max 180). Click to teleport the sprite!
             </div>
           )}
 
