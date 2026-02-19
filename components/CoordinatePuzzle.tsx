@@ -1,4 +1,3 @@
-
 import { Play, RotateCcw, Maximize, Trophy, ChevronRight, Sparkles, Puzzle, Check, Home, PartyPopper } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
 import { SpriteState, PuzzleLevel } from '../types';
@@ -28,7 +27,8 @@ const CoordinatePuzzle: React.FC = () => {
   const [isGameFinished, setIsGameFinished] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  const COORD_LIMIT = 240;
+  const X_LIMIT = 240;
+  const Y_LIMIT = 180;
   const WIN_TOLERANCE = 10; 
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const CoordinatePuzzle: React.FC = () => {
     setIsShaking(false);
   };
 
-  const handleCoordinateInput = (val: string, setter: (v: string) => void) => {
+  const handleCoordinateInput = (val: string, setter: (v: string) => void, isY: boolean) => {
     if (val === "" || val === "-") {
       setter(val);
       return;
@@ -62,7 +62,8 @@ const CoordinatePuzzle: React.FC = () => {
     
     const num = parseInt(val);
     if (!isNaN(num)) {
-      const clamped = Math.max(-COORD_LIMIT, Math.min(COORD_LIMIT, num));
+      const limit = isY ? Y_LIMIT : X_LIMIT;
+      const clamped = Math.max(-limit, Math.min(limit, num));
       setter(clamped.toString());
     }
   };
@@ -74,8 +75,8 @@ const CoordinatePuzzle: React.FC = () => {
     setIsShaking(false);
     playSound('pop');
 
-    const targetX = Math.max(-COORD_LIMIT, Math.min(COORD_LIMIT, parseInt(inputX) || 0));
-    const targetY = Math.max(-COORD_LIMIT, Math.min(COORD_LIMIT, parseInt(inputY) || 0));
+    const targetX = Math.max(-X_LIMIT, Math.min(X_LIMIT, parseInt(inputX) || 0));
+    const targetY = Math.max(-Y_LIMIT, Math.min(Y_LIMIT, parseInt(inputY) || 0));
 
     playSound('whoosh');
     setSprite(s => ({ ...s, x: targetX, y: targetY }));
@@ -106,7 +107,6 @@ const CoordinatePuzzle: React.FC = () => {
     
     setIsRunning(false);
   };
-
   const nextLevel = () => {
     playSound('pop');
     if (currentLevelIdx < PUZZLES.length - 1) {
@@ -159,12 +159,12 @@ const CoordinatePuzzle: React.FC = () => {
     );
   }
 
-  const getXPos = (val: number) => `calc(50% + ${val / COORD_LIMIT * 50}%)`;
-  const getYPos = (val: number) => `calc(50% - ${val / COORD_LIMIT * 50}%)`;
+  const getXPos = (val: number) => `calc(50% + ${val / X_LIMIT * 50}%)`;
+  const getYPos = (val: number) => `calc(50% - ${val / Y_LIMIT * 50}%)`;
 
   const getPieceBgStyle = () => {
-    const bgX = 50 - (sprite.x / COORD_LIMIT * 50);
-    const bgY = 50 + (sprite.y / COORD_LIMIT * 50);
+    const bgX = 50 - (sprite.x / X_LIMIT * 50);
+    const bgY = 50 + (sprite.y / Y_LIMIT * 50);
     
     return {
       backgroundImage: `url(${currentLevel.backgroundImage})`,
@@ -233,7 +233,7 @@ const CoordinatePuzzle: React.FC = () => {
                     value={inputX}
                     min="-240"
                     max="240"
-                    onChange={(e) => handleCoordinateInput(e.target.value, setInputX)}
+                    onChange={(e) => handleCoordinateInput(e.target.value, setInputX, false)}
                     className="w-full bg-white text-blue-700 rounded-xl md:rounded-2xl px-2 py-1 md:py-3 focus:ring-4 ring-yellow-400 outline-none text-center font-black shadow-md border-b-4 border-gray-200 text-base md:text-2xl"
                   />
                 </div>
@@ -246,9 +246,9 @@ const CoordinatePuzzle: React.FC = () => {
                   <input 
                     type="number"
                     value={inputY}
-                    min="-240"
-                    max="240"
-                    onChange={(e) => handleCoordinateInput(e.target.value, setInputY)}
+                    min="-180"
+                    max="180"
+                    onChange={(e) => handleCoordinateInput(e.target.value, setInputY, true)}
                     className="w-full bg-white text-blue-700 rounded-xl md:rounded-2xl px-2 py-1 md:py-3 focus:ring-4 ring-yellow-400 outline-none text-center font-black shadow-md border-b-4 border-gray-200 text-base md:text-2xl"
                   />
                 </div>
@@ -296,8 +296,8 @@ const CoordinatePuzzle: React.FC = () => {
                  <div className="absolute left-2 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">-240</div>
                  <div className="absolute right-2 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">240</div>
                  <div className="absolute left-1/2 -translate-x-4 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">0</div>
-                 <div className="absolute left-1/2 translate-x-2 top-2 text-white/60 text-[8px] md:text-sm font-black">240</div>
-                 <div className="absolute left-1/2 translate-x-2 bottom-2 text-white/60 text-[8px] md:text-sm font-black">-240</div>
+                 <div className="absolute left-1/2 translate-x-2 top-2 text-white/60 text-[8px] md:text-sm font-black">180</div>
+                 <div className="absolute left-1/2 translate-x-2 bottom-2 text-white/60 text-[8px] md:text-sm font-black">-180</div>
               </div>
 
               {/* Target Slot */}
@@ -358,3 +358,7 @@ const CoordinatePuzzle: React.FC = () => {
 };
 
 export default CoordinatePuzzle;
+  
+
+
+
