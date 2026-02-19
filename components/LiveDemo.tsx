@@ -23,7 +23,7 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
   const [message, setMessage] = useState('');
   const [isLevelComplete, setIsLevelComplete] = useState(false);
 
-  const COORD_LIMIT = 50;
+  const COORD_LIMIT = 240;
 
   const getCorrectCostumeForBg = (background: string) => {
     const bgIndex = BACKGROUNDS.indexOf(background);
@@ -123,7 +123,7 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
           {lessonId === LessonId.COSTUME_1_2 ? 'Mission: Match the Piece!' : 'Interactive Try-It!'}
         </h4>
         <div className="text-xs font-bold text-blue-500 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-          Range: -50 to 50
+          Range: -240 to 240
         </div>
       </div>
 
@@ -180,7 +180,7 @@ const LiveDemo: React.FC<LiveDemoProps> = ({ lessonId }) => {
               <div className="flex items-center gap-2 mb-2 text-blue-500 not-italic font-bold uppercase text-[10px]">
                 <MousePointer2 size={14} /> Stage Explorer
               </div>
-              Move mouse to see X/Y (max 50). Click to teleport the sprite!
+              Move mouse to see X/Y (max 240). Click to teleport the sprite!
             </div>
           )}
 
