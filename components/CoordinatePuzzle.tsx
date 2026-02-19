@@ -246,8 +246,8 @@ const CoordinatePuzzle: React.FC = () => {
                   <input 
                     type="number"
                     value={inputY}
-                    min="-50"
-                    max="50"
+                    min="-240"
+                    max="240"
                     onChange={(e) => handleCoordinateInput(e.target.value, setInputY)}
                     className="w-full bg-white text-blue-700 rounded-xl md:rounded-2xl px-2 py-1 md:py-3 focus:ring-4 ring-yellow-400 outline-none text-center font-black shadow-md border-b-4 border-gray-200 text-base md:text-2xl"
                   />
@@ -293,11 +293,11 @@ const CoordinatePuzzle: React.FC = () => {
                  <div className="absolute left-1/2 top-0 h-full w-[3px] bg-white opacity-40 shadow-[0_0_15px_rgba(255,255,255,0.6)] transform -translate-x-1/2" />
 
                  {/* Coordinate Numeric Markers */}
-                 <div className="absolute left-2 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">-50</div>
-                 <div className="absolute right-2 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">50</div>
+                 <div className="absolute left-2 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">-240</div>
+                 <div className="absolute right-2 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">240</div>
                  <div className="absolute left-1/2 -translate-x-4 top-1/2 translate-y-2 text-white/60 text-[8px] md:text-sm font-black">0</div>
-                 <div className="absolute left-1/2 translate-x-2 top-2 text-white/60 text-[8px] md:text-sm font-black">50</div>
-                 <div className="absolute left-1/2 translate-x-2 bottom-2 text-white/60 text-[8px] md:text-sm font-black">-50</div>
+                 <div className="absolute left-1/2 translate-x-2 top-2 text-white/60 text-[8px] md:text-sm font-black">240</div>
+                 <div className="absolute left-1/2 translate-x-2 bottom-2 text-white/60 text-[8px] md:text-sm font-black">-240</div>
               </div>
 
               {/* Target Slot */}
